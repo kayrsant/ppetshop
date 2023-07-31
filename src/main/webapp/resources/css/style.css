@@ -1,0 +1,39 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: black;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+.fundo{
+    background-image: url("https://i.imgur.com/CdoDell.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.button-login{
+    padding-left: 15px;
+}
+
+.alert {
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

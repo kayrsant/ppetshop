@@ -1,0 +1,84 @@
+CREATE TABLE Permissao(
+	id serial primary key,
+	nome varchar(100)
+);
+
+CREATE TABLE Usuario(
+	id serial primary key,
+	nome varchar(100),
+	cpf varchar(100) UNIQUE,
+	email varchar(100) UNIQUE,
+	data_Cadastro Date,
+	login varchar(100) UNIQUE,
+	senha varchar(100),
+	id_permissao int,
+	foreign key (id_permissao) references Permissao(id)
+);
+
+CREATE TABLE Servico(
+	id serial primary key,
+	nome varchar(100),
+	descricao varchar(100),
+	duracao decimal(4,2)
+);
+
+CREATE TABLE Tipo(
+	id serial primary key,
+	nome varchar(100)
+);
+
+CREATE TABLE Raca(
+	id serial primary key,
+	id_Tipo int,
+	nome varchar(100),
+	foreign key (id_Tipo) references Tipo(id)
+);
+
+CREATE TABLE Pet(
+	id serial primary key,
+	id_Raca int,
+	id_Tipo int,
+	id_Usuario int,
+	nome varchar(100),
+	idade int,
+	foreign key (id_Raca) references Raca(id),
+	foreign key (id_Tipo) references Tipo(id),
+	foreign key (id_Usuario) references Usuario(id)
+);
+
+CREATE TABLE Agendamento(
+	id serial primary key,
+	id_Usuario int,
+	id_Pet int,
+	id_Servico int,
+	data_Agendamento timestamp with time zone,
+	foreign key (id_Usuario) references Usuario(id),
+	foreign key (id_Pet) references Pet(id),
+	foreign key (id_Servico) references Servico(id)
+);
+
+INSERT INTO Permissao (nome) VALUES ('Usuário');
+
+INSERT INTO Usuario (nome, cpf, email, data_Cadastro, login, senha, id_permissao) 
+VALUES ('João Silva', '123.456.789-00', 'joao.silva@example.com', CURRENT_TIMESTAMP, 'joaosilva', 'senha123', 1);
+
+INSERT INTO Servico (nome, descricao, duracao) 
+VALUES ('Banho e Tosa', 'Serviço de banho e tosa para pets', 2.5);
+
+INSERT INTO Servico (nome, descricao, duracao) 
+VALUES ('Pet Walking', 'Serviço de caminhada com seus pets', 1.0);
+
+INSERT INTO Servico (nome, descricao, duracao) 
+VALUES ('Hospedagem', 'Serviço de hospedagem para seus pets', 12.0);
+
+INSERT INTO Tipo (nome) VALUES ('Cachorro');
+
+INSERT INTO Raca (id_Tipo, nome) VALUES (1, 'Poodle');
+
+INSERT INTO Pet (id_Raca, id_Tipo, id_Usuario, nome, idade) 
+VALUES (1, 1, 1, 'Fifi', 3);
+
+INSERT INTO Pet (id_Raca, id_Tipo, id_Usuario, nome, idade) VALUES (1, 1, 1, 'Bolinha', 3);
+
+INSERT INTO Agendamento (id_Usuario, id_Pet, id_Servico, data_Agendamento) 
+VALUES (1, 1, 1, CURRENT_TIMESTAMP);
